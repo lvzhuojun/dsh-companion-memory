@@ -166,7 +166,7 @@ The first two were fixed before the held-out full-mode run, so the numbers above
 - The full-mode run showed 0.7 regressing on "earlier versions" (4/6 → 3/6).
 - History questions followed the supersede links she writes, and those often point to the wrong entry. For example, "moved to Xiamen" pointed to a routine daily note.
 - Keyed facts now pull their past values by key.
-- Replaying only the affected categories on the snapshot (earlier versions / trajectory / latest version / long chain): 22/24 → **24/24**.
+- Replaying only the affected categories on the snapshot (earlier versions / trajectory / latest version / long chain): 22/24 → **24/24**; in the full replay below, the same four categories score 23/24 (model output is stochastic; one probe differs).
 
 With all three fixes, a full replay of the dev-world seed 11 snapshot scores 0.7 **91%** (175/193) against 0.6's 83% (161/193).
 
