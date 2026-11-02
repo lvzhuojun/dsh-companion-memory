@@ -1,0 +1,47 @@
+{
+  "name": "@dsh-companion/dsh-plugin",
+  "version": "0.7.0",
+  "private": true,
+  "description": "DSH plugin: wires the memory engine into DeepSeek Harness (memory rules, stable layer, diary and memory tools, crisis protocol, Chinese companion compaction).",
+  "keywords": [
+    "deepseek",
+    "dsh",
+    "deepseek-harness",
+    "dsh-plugin",
+    "agent-memory",
+    "companion"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lvzhuojun/dsh-companion-memory.git",
+    "directory": "packages/dsh-plugin"
+  },
+  "homepage": "https://github.com/lvzhuojun/dsh-companion-memory#readme",
+  "bugs": {
+    "url": "https://github.com/lvzhuojun/dsh-companion-memory/issues"
+  },
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./compaction": {
+      "types": "./dist/compaction.d.ts",
+      "default": "./dist/compaction.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@dsh-companion/memory": "0.7.0"
+  },
+  "bundleVersion": "0.7.0",
+  "scripts": {
+    "bundle": "node scripts/bundle.mjs"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "name": "dsh-companion-memory",
+  "private": true,
+  "version": "0.7.0",
+  "description": "Long-term memory for Chinese companion agents on DeepSeek Harness (DSH): first-person selective memory, validity + keys, per-person privacy, proactive follow-ups, crisis protocol, bounded cost. No vector DB.",
+  "keywords": [
+    "agent-memory",
+    "llm-memory",
+    "long-term-memory",
+    "memory",
+    "deepseek",
+    "dsh",
+    "deepseek-harness",
+    "companion",
+    "ai-companion",
+    "chinese",
+    "sqlite",
+    "fts5",
+    "bm25",
+    "benchmark",
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lvzhuojun/dsh-companion-memory.git"
+  },
+  "homepage": "https://github.com/lvzhuojun/dsh-companion-memory#readme",
+  "bugs": {
+    "url": "https://github.com/lvzhuojun/dsh-companion-memory/issues"
+  },
+  "license": "Apache-2.0",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "prepare": "git config core.hooksPath .githooks || true",
+    "build": "tsc -b",
+    "typecheck": "tsc -b && tsc -p bench",
+    "test": "vitest run",
+    "scan": "node scripts/scan-instance.mjs --all",
+    "check": "npm run scan && npm run typecheck && npm test",
+    "bench:p0": "tsx bench/p0/cli.ts",
+    "bench:p0:rescore": "tsx bench/p0/rescore.ts",
+    "bench:lifesim": "tsx bench/membench/cli.ts --dataset lifesim",
+    "bench:score": "tsx bench/rubric/score.ts",
+    "deploy:night:pack": "tsc -b && node deploy/night/pack.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "dsh-fish-memory": "1.4.4",
+    "esbuild": "^0.28.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5"
+  }
+}

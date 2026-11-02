@@ -1,0 +1,4 @@
+#!/bin/sh
+# 防泄露第二层：提交前扫描暂存区（第一层 .gitignore，第三层 CI）。
+# 启用：npm install 时自动执行 git config core.hooksPath .githooks
+exec node scripts/scan-instance.mjs --staged

@@ -1,0 +1,56 @@
+# DSH 预设示例（cordis.patch.yml）。路径、称呼都是示例，请换成你自己的。
+# 用法：node packages/dsh-plugin/scripts/bundle.mjs --patch <你的 cordis.patch.yml>，或打包后手动放进 bundle/。
+# 每个配置键与开关的含义见 docs/architecture.md 第 5 节；部署步骤见 docs/deploy.md。
+#
+# 注意：
+#   - 所有开关默认关；成对的开关（S、Y、T、K、F、W）夜间整理的 config.json 里也要一起开。
+#   - variablePrefix 要和下面 persona.prefix 里的 {{<前缀>_*}} 一致。
+#   - 紧急联系人（emergencyContact）只写在你自己的私有预设里，不要提交到任何仓库。
+- insert:
+    - id: preset-companion
+      name: '@deepseek-ai/dsh-agent-preset'
+      config:
+        id: companion
+        name: 陪伴
+        description: 带长期记忆的陪伴会话
+        plugins:
+          - id: her-life
+            name: 'dsh-her-life'
+            config:
+              seedPath: /srv/companion/seed.md       # 种子：root 所有、0644，她只能读
+              lifeDir: /home/companion/life          # 生命目录：self.md、diary/、proposals/、memory.db
+              ownerName: 主人                         # 她对你的称呼
+              ownerBook: to_owner                    # 给你看的那本日记（目录名把 _ 换成 -）
+              variablePrefix: companion              # 提示词变量前缀
+              privateDiaryAudited: false             # 你承诺只用留痕的方式看她的私人日记时才填 true（会写进给她的说明）
+              blockTools: [qq_bridge_napcat]         # 这个会话里不该用的全局工具
+              # 读侧
+              askFirst: true                         # C
+              timeCalc: true                         # D
+              prerecall: true                        # R
+              followTrigger: true                    # K
+              followUpLoose: true                    # F
+              followUpWeight: true                   # W
+              memoryKeys: true                       # S
+              # 0.7
+              memorySlots: true                      # Y
+              personCard: true                       # T
+              # crisis: true                         # Z：见 docs/deploy.md 第 6 节
+              # emergencyContact: '<只写在私有预设里>'
+          - id: persona
+            name: '@deepseek-ai/dsh-persona'
+            config:
+              prefix: "{{companion_seed}}\n\n---\n\n# 我是谁\n\n{{companion_self}}\n\n---\n\n{{companion_memory}}"
+              complete: true
+          - id: time-context
+            name: '@deepseek-ai/dsh-time-context'
+          - id: compaction
+            name: cordis:group
+            group: true
+            isolate:
+              compaction: true
+            config:
+              - id: compaction-basic
+                name: 'dsh-her-life/compaction'      # 可选：中文陪伴版压缩；换回 '@deepseek-ai/dsh-compaction-basic' 即用默认
+              - id: command-compact
+                name: '@deepseek-ai/dsh-command-compact'

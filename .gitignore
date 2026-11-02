@@ -1,0 +1,44 @@
+# —— 她本人：永不入库 ——
+life/
+instance/
+**/diary/
+**/proposals/
+**/self.md
+**/seed.md
+!templates/**/seed.template.md
+*.db
+*.db-*
+*.sqlite*
+*.jsonl
+*.jsonl.zst
+sessions/
+storages/
+# —— 秘密 ——
+.env
+.env.*
+*.env
+*.key
+*.pem
+credentials*
+.credentials*
+# —— 构建 ——
+node_modules/
+dist/
+coverage/
+.DS_Store
+__pycache__/
+
+# —— 私有交接与实例信息（含服务器 IP、QQ 号、会话 id）——
+private/
+
+# —— TypeScript ——
+*.tsbuildinfo
+
+# —— 插件打包产物 ——
+packages/dsh-plugin/bundle/
+
+# —— 评测结果（含模型回复，不入库）——
+bench/results/
+
+# —— 打包与迁移产物（deploy:night:pack、migrate）——
+out/

@@ -1,0 +1,7 @@
+{
+  "files": [],
+  "references": [
+    { "path": "packages/memory" },
+    { "path": "packages/dsh-plugin" }
+  ]
+}

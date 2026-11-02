@@ -1,0 +1,34 @@
+{
+  "name": "@dsh-companion/memory",
+  "version": "0.7.0",
+  "private": true,
+  "description": "Memory engine: per-person, provenance-tagged long-term memory with validity + keys. Pure TypeScript, no DSH dependency.",
+  "keywords": [
+    "agent-memory",
+    "llm-memory",
+    "long-term-memory",
+    "sqlite",
+    "fts5",
+    "bm25"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lvzhuojun/dsh-companion-memory.git",
+    "directory": "packages/memory"
+  },
+  "homepage": "https://github.com/lvzhuojun/dsh-companion-memory#readme",
+  "bugs": {
+    "url": "https://github.com/lvzhuojun/dsh-companion-memory/issues"
+  },
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": ["dist"]
+}

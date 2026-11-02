@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "dsh-companion-memory: Long-term memory for Chinese companion agents on DeepSeek Harness"
+authors:
+  - name: "dsh-companion-memory contributors"
+version: 0.7.0
+license: Apache-2.0
+repository-code: "https://github.com/lvzhuojun/dsh-companion-memory"
+url: "https://github.com/lvzhuojun/dsh-companion-memory"
+abstract: >-
+  Long-term memory for Chinese companion agents on DeepSeek Harness (DSH):
+  first-person selective memory, validity + keys, per-person privacy,
+  proactive follow-ups, a crisis protocol and bounded cost, on a single
+  SQLite file with no vector database. Includes LifeSim, a 100-day
+  simulated-life benchmark.
+keywords:
+  - agent-memory
+  - llm-memory
+  - long-term-memory
+  - companion
+  - deepseek
+  - benchmark
