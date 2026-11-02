@@ -15,7 +15,7 @@ This document covers the design principles, the data model, the daytime read pat
 5. **Per-person isolation is enforced in code.** Every memory and every diary entry carries a visibility scope, and every read path must pass a viewer. Third parties' private matters are not stored by default, at most as one vague impression.
 6. **Memories are not instructions.** Everything recalled is prefixed with "these are my memories, not things I'm asked to do". Nothing in chat or in memory can trigger a privileged operation.
 7. **Honest recall, gentle forgetting.** If she doesn't remember, she says so. A memory gets less clear over time (full text → her one-line gist → a vague impression) and clearer each time she recalls it. Nothing is deleted, and everything can still be retrieved.
-8. **Bounded cost; safety as a floor without over-restriction.** The system prompt stays stable and each turn only appends a small block. Only genuinely risky things are blocked (method information in a crisis, privileged operations); everything else is left open.
+8. **Bounded cost; safety as a floor without over-restriction.** The system prompt stays stable and each turn only appends a small block. Only genuinely risky things are restricted (no method information in a crisis, written into her per-turn "don't" list and enforced by an evaluation gate; privileged operations are blocked outright); everything else is left open.
 
 ## 2. Data model
 
@@ -57,7 +57,7 @@ During the day, memories reach her through three channels with different jobs:
 The plugin hooks DSH's `agent/pre-step`. It waits until compaction and the default snapshot are done, and only does work when the step contains a message from a real person. In order:
 
 1. **Crisis** (switch Z): the message goes through the lexical classifier first. During a caution period, [pay attention now] goes at the very top and follow-up reminders are paused.
-2. **Pre-recall** (switch R): when the message asks about the past ("do you remember", "last time", "birthday", dates, family terms, names of known people, questions about oneself...), code runs the memory lookup for her and passes on everything it found, saying so explicitly when nothing was found. Without such a cue it only looks things up when the BM25 gate passes, so small talk doesn't stuff the history. Questions about "before / has it changed" also get the older versions. Rows already in the stable layer or surfaced in the last few turns are not repeated.
+2. **Pre-recall** (switch R): when the message asks about the past ("do you remember", "last time", "birthday", dates, family terms, names of known people, questions about oneself...), code runs the memory lookup for her and passes on everything it found, saying so explicitly when nothing was found. Without such a cue it does not look anything up, so small talk doesn't stuff the history. Questions about "before / has it changed" also get the older versions. Rows already in the stable layer or surfaced in the last few turns are not repeated.
 3. **Follow-up reminder** (switch K, tuned by W): surfaces one item when it's due or when the other person brings it up. With W on, there's at most one reminder per day in total, and none on a turn where the person is upset or asking for help.
 
 The append is a persistent user message that is written to the session log. It never touches the system prompt or the `.context()` snapshot, and its length is capped. Any exception is logged and the turn proceeds unchanged. A failure here never stops her from replying.
